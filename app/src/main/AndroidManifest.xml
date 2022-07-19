@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   package="com.example.baseproject">
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-  <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+  <uses-permission
+      android:name="android.permission.PACKAGE_USAGE_STATS"
       tools:ignore="ProtectedPermissions" />
 
   <application
@@ -17,11 +19,10 @@
     android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
     tools:targetApi="31">
     <activity
-      android:name=".View.MainActivity"
+      android:name=".view.MainActivity"
       android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
-
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>

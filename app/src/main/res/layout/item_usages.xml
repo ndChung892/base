@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
         <variable
-            name="App"
-            type="com.example.baseproject.Model.App" />
+            name="app"
+            type="com.example.baseproject.model.App" />
     </data>
 
 
@@ -20,7 +19,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             tools:srcCompat="@drawable/ic_launcher_background"
-            android:src="@{App.appIcon}"
+            android:src="@{app.appIcon}"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             />
@@ -41,15 +40,6 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/txtappDuration"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:text="@{App.appDuration}"
-                android:hint="App name"
-                android:textSize="16dp" />
 
         </LinearLayout>
     </LinearLayout>

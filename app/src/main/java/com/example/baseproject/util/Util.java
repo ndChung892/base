@@ -1,5 +1,6 @@
-package com.example.baseproject.Util;
+package com.example.baseproject.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -10,7 +11,7 @@ import androidx.annotation.NonNull;
 import com.example.baseproject.R;
 
 public class Util {
-    //    @SuppressLint("UseCompatLoadingForDrawables")
+        @SuppressLint("UseCompatLoadingForDrawables")
     public static Drawable getAppIconByPackageName(@NonNull Context context, String packageName) {
         PackageManager packageManager = context.getPackageManager();
         try {
@@ -25,12 +26,12 @@ public class Util {
         PackageManager packageManager = context.getPackageManager();
         ApplicationInfo applicationInfo = null;
         try {
-            packageManager.getApplicationInfo(packageName, 0);
+            applicationInfo = packageManager.getApplicationInfo(packageName, 0);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
         if (applicationInfo == null) {
-            return " ";
+            return "Unknown";
         } else {
             return (String) packageManager.getApplicationLabel(applicationInfo);
         }
