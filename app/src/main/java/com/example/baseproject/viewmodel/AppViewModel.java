@@ -24,9 +24,6 @@ public class AppViewModel extends ViewModel {
     private MutableLiveData<List<App>> mAppList = new MutableLiveData<>();
     private MutableLiveData<App> mLongestUsageTime= new MutableLiveData<>();
 
-    private MutableLiveData<Boolean> mIsLoadingApp = new MutableLiveData<>(false);
-
-
     public AppViewModel(Application application) {
         mApplication = application;
     }
@@ -39,31 +36,21 @@ public class AppViewModel extends ViewModel {
         return mLongestUsageTime;
     }
 
-    public LiveData<Boolean> isLoadingApp() {
-        return mIsLoadingApp;
-    }
 
     public void requestAppList() {
         new Thread(() -> {
-//            mIsLoadingApp.postValue(true);
-
             List<App> apps = getApps();
             mAppList.postValue(apps);
-
             App longestUsageTime = getLongestUsageTime(apps);
             mLongestUsageTime.postValue(longestUsageTime);
-
-//            mIsLoadingApp.postValue(false);
-
         }).start();
     }
-
     @NonNull
     private List<App> getApps() {
         List<App> apps = new ArrayList<>();
         @SuppressLint("WrongConstant")
-        UsageStatsManager usm =
-                (UsageStatsManager) mApplication.getSystemService(USAGE_STATS_SERVICE);
+        UsageStatsManager usm = (UsageStatsManager) mApplication
+                .getSystemService(USAGE_STATS_SERVICE);
         List<UsageStats> usageStatsList = usm.queryUsageStats(
                 UsageStatsManager.INTERVAL_DAILY,
                 System.currentTimeMillis() - (1000 * 3600   * 24),

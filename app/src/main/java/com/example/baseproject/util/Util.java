@@ -31,7 +31,7 @@ public class Util {
             e.printStackTrace();
         }
         if (applicationInfo == null) {
-            return "Unknown";
+            return "App null";
         } else {
             return (String) packageManager.getApplicationLabel(applicationInfo);
         }
