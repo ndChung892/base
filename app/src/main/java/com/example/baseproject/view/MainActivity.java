@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         mBinding.setLifecycleOwner(this);
 
         setUpRcv();
-        setUpBtnEnableUsageStatsPermission();
+        setUpBtnGetUsageStatsPermission();
     }
 
     private void setUpRcv() {
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         appViewModel.getAppList().observe(this, infoAppAdapter::submitList);
     }
 
-    private void setUpBtnEnableUsageStatsPermission() {
+    private void setUpBtnGetUsageStatsPermission() {
         mBinding.btnGetUsages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,11 +67,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        actionToGetData();
+        GetData();
     }
 
-    private void actionToGetData() {
-        if (checkUsageStatsPermission()) {
+    private void GetData() {
+        if (checkPermission()) {
             showHideWithPermission();
             if (appViewModel.getAppList().getValue() == null) {
                 appViewModel.requestAppList();
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean checkUsageStatsPermission() {
+    private boolean checkPermission() {
         int mode = AppOpsManagerCompat.noteOpNoThrow(
                 getApplicationContext(),
                 AppOpsManager.OPSTR_GET_USAGE_STATS,
