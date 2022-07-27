@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import com.example.baseproject.R;
 
 public class Util {
-        @SuppressLint("UseCompatLoadingForDrawables")
     public static Drawable getAppIconByPackageName(@NonNull Context context, String packageName) {
         PackageManager packageManager = context.getPackageManager();
         try {

@@ -45,6 +45,19 @@ public class AppViewModel extends ViewModel {
             mLongestUsageTime.postValue(longestUsageTime);
         }).start();
     }
+    private App getLongestUsageTime(List<App> apps) {
+
+        if (apps == null || apps.isEmpty()) {
+            return null;
+        }
+        App longestUsageTime = apps.get(0);
+        for (App App : apps) {
+            if (App.getAppUsageTime() > longestUsageTime.getAppUsageTime()) {
+                longestUsageTime = App;
+            }
+        }
+        return longestUsageTime;
+    }
     @NonNull
     private List<App> getApps() {
         List<App> apps = new ArrayList<>();
@@ -68,36 +81,19 @@ public class AppViewModel extends ViewModel {
         }
         return apps;
     }
-    private App getLongestUsageTime(List<App> apps) {
 
-        if (apps == null || apps.isEmpty()) {
-            return null;
-        }
-
-        App longestUsageTime = apps.get(0);
-        for (App App : apps) {
-            if (App.getAppUsageTime() > longestUsageTime.getAppUsageTime()) {
-                longestUsageTime = App;
-            }
-        }
-        return longestUsageTime;
-    }
     public static class MainViewModelFactory implements ViewModelProvider.Factory {
-
         private final Application mApplication;
-
         public MainViewModelFactory(Application application) {
             mApplication = application;
         }
-
-        @SuppressWarnings("unchecked")
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             if (modelClass.isAssignableFrom(AppViewModel.class)) {
                 return (T) new AppViewModel(mApplication);
             }
-            throw new IllegalStateException("unEnabled constructor");
+            throw new IllegalStateException("");
         }
     }
 
